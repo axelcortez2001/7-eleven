@@ -130,10 +130,10 @@
                     <tbody>
                         <?php foreach ($employees as $employee) : ?>
                             <tr>
-                                <td><?php echo $user['emp_id']; ?></td>
+                                <td><?php echo $user['employee_id']; ?></td>
                                 <td><?php echo $user['name']; ?></td>
-                                <td><?php echo $user['address']; ?></td>
-                                <td><?php echo $user['phone_no']; ?></td>
+                                <td><?php echo $user['salary']; ?></td>
+                                <td><?php echo $user['bankaccount']; ?></td>
                                 <td><?php echo $user['date_hired']; ?></td>
                                 <td><?php echo $user['job_name']; ?></td>
                             </tr>
