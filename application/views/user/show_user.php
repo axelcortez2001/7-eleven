@@ -112,7 +112,7 @@
                             <li class="<?php if ($location === 'accounts') {
                                             echo 'active';
                                         } ?>">
-                                <a href="<?php echo site_url('User') ?>">
+                                <a href="<?php echo base_url('accounts') ?>">
                                     <i class="fa fa-user"></i> Accounts
                                 </a>
                             </li>
@@ -136,25 +136,23 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Username</th>
+                            <th>Password</th>
                             <th>Role</th>
-                            <th>Salary</th>
-                            <th>Bank Account</th>
-                            <th>Date Hired</th>
                             <th>Action <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" style="margin-left: 10px;"><i class="fas fa-plus"></i> Add</button></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($employees as $employee) : ?>
+                        <?php foreach ($users as $user) : ?>
                             <tr>
-                                <td><?php echo $employee['employee_id']; ?></td>
-                                <td><?php echo $employee['name']; ?></td>
-                                <td><?php echo $employee['role']; ?></td>
-                                <td><?php echo $employee['salary']; ?></td>
-                                <td><?php echo $employee['bankaccount']; ?></td>
-                                <td><?php echo $employee['datehired']; ?></td>
+                                <td><?php echo $user['id']; ?></td>
+                                <td><?php echo $user['name']; ?></td>
+                                <td><?php echo $user['username']; ?></td>
+                                <td><?php echo $user['password']; ?></td>
+                                <td><?php echo $user['role']; ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-employee_id="<?php echo $employee['employee_id']; ?>" data-name="<?php echo $employee['name']; ?>" data-role="<?php echo $employee['role']; ?>" data-salary="<?php echo $employee['salary']; ?> " data-bankaccount="<?php echo $employee['bankaccount']; ?> "><i class="fas fa-edit"></i>Edit</button>
-                                    <a href="<?php echo site_url('employee/delete/' . $employee['employee_id']); ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                    <button type="button" class="btn btn-primary edit-button" data-toggle="modal" data-target="#editModal" data-id="<?php echo $user['id']; ?>" data-name="<?php echo $user['name']; ?>" data-username="<?php echo $user['username']; ?>" data-password="<?php echo $user['password']; ?>" data-role="<?php echo $user['role']; ?>"><i class="fas fa-edit"></i>Edit</button>
+                                    <a href="<?php echo site_url('user/delete/' . $user['id']); ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -164,42 +162,40 @@
         </div>
     </div>
 
-    <!-- Add Employee Modal -->
+    <!-- Add User Modal -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add New Employee</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add New User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo site_url('employee/add'); ?>" method="post">
+                    <form action="<?php echo site_url('user/add'); ?>" method="post">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select class="form-control" id="role" name="role" required>
                                 <option value="">Select Role</option>
                                 <option value="admin">Administrator</option>
-                                <option value="cashier">cashier</option>
-                                <option value="accountant">accountant</option>
-                                <option value="manager">manager</option>
-                                <option value="crew">Crew</option>
-                                <option value="guard">Guard</option>
-                                <option value="cook">Cook</option>
+                                <option value="cashier">Cashier</option>
+                                <option value="accountant">Accounting</option>
+                                <option value="hr">Hr</option>
+
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="salary">Salary</label>
-                            <input type="text" class="form-control" id="salary" name="salary" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="bankaccount">Bank Account</label>
-                            <input type="text" class="form-control" id="bankaccount" name="bankaccount" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -211,48 +207,46 @@
         </div>
     </div>
 
-    <!-- Edit Employee Modal -->
+    <!-- Edit User Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Employee</h5>
+                    <h5 class="modal-title" id="editModalLabel">Edit User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <form method="POST" action="<?php echo site_url('employee/update'); ?>">
+                    <form method="POST" action="<?php echo site_url('user/update'); ?>">
                         <div class="form-group">
-                            <label for="employee_id">Employee ID</label>
-                            <input type="text" class="form-control" id="employee_id" name="employee_id" readonly>
+                            <label for="id">ID</label>
+                            <input type="text" class="form-control" id="id" name="id" readonly>
                         </div>
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
+
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" id="password" name="password">
+                        </div>
+
                         <div class="form-group">
                             <label for="role">User Role</label>
                             <select class="form-control" id="role" name="role">
                                 <option value="Admin">Administrator</option>
-                                <option value="manager">Manager</option>
                                 <option value="cashier">Cashier</option>
                                 <option value="accountant">Accounting</option>
                                 <option value="hr">Hr</option>
-                                <option value="crew">Crew</option>
-                                <option value="guard">Guard</option>
-                                <option value="cook">Cook</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="salary">Salary</label>
-                            <input type="text" class="form-control" id="salary" name="salary">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="bankaccount">Bank Account</label>
-                            <input type="text" class="form-control" id="bankaccount" name="bankaccount">
                         </div>
 
                         <div class="modal-footer">
@@ -284,25 +278,25 @@
         $(document).ready(function() {
             $('.edit-button').click(function() {
                 var button = $(this);
-                var employee_id = button.data('employee_id');
+                var id = button.data('id');
                 var name = button.data('name');
+                var username = button.data('username');
+                var password = button.data('password');
                 var role = button.data('role');
-                var salary = button.data('salary');
-                var bankaccount = button.data('bankaccount');
 
 
-                console.log(employee_id);
+                console.log(id);
                 console.log(name);
+                console.log(username);
+                console.log(password);
                 console.log(role);
-                console.log(salary);
-                console.log(bankaccount);
 
 
-                $('#editModal #employee_id').val(employee_id);
+                $('#editModal #id').val(id);
                 $('#editModal #name').val(name);
+                $('#editModal #username').val(username);
+                $('#editModal #password').val(password);
                 $('#editModal #role').val(role);
-                $('#editModal #salary').val(salary);
-                $('#editModal #bankaccount').val(bankaccount);
 
 
                 $('#editModal').modal('show'); // Show the modal

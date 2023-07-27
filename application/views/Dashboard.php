@@ -108,7 +108,7 @@
                             <li class="<?php if ($location === 'accounts') {
                                             echo 'active';
                                         } ?>">
-                                <a href="<?php echo base_url('accounts') ?>">
+                                <a href="<?php echo site_url('User') ?>">
                                     <i class="fa fa-user"></i> Accounts
                                 </a>
                             </li>

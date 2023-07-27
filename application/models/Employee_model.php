@@ -39,15 +39,4 @@ class Employee_model extends CI_Model
         $this->db->where('employee_id', $employee_id);
         $this->db->delete('tbl_employee');
     }
-
-    public function search_employee($keyword)
-    {
-        // Perform a search for users based on the keyword
-        $this->db->like('employee_id', $keyword);
-        $this->db->or_like('name', $keyword);
-        $this->db->or_like('role', $keyword);
-        $this->db->or_like('datehired', $keyword);
-        $this->db->or_like('bankaccount', $keyword);
-        return $this->db->get('tbl_employee')->result_array();
-    }
 }

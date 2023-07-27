@@ -43,7 +43,7 @@ class Employee extends CI_Controller
 
     public function update()
     {
-        $this->load->model('Employee_model'); //Load the user_model
+        $this->load->model('Employee_model'); //Load the employee_model
         $data = array(
             'employee_id' => $this->input->post('employee_id'),
             'name' => $this->input->post('name'),
@@ -67,19 +67,5 @@ class Employee extends CI_Controller
     {
         $this->Employee_model->delete_employee($employee_id);
         redirect('employee');
-    }
-
-    public function search()
-    {
-        $keyword = $this->input->post('keyword');
-
-        // Perform the search
-        $data['employees'] = $this->Employee_model->search_employee($keyword);
-
-        $user = $this->session->userData('user');
-        $data['user'] = $user; // Add this line to pass the $user variable to the view
-
-        // Load the user list view with the search results
-        $this->load->view('show_employee', $data);
     }
 }
