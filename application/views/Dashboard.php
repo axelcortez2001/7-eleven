@@ -64,7 +64,7 @@
                         <li class="<?php if (in_array($location, ['inventory', 'item'])) {
                                         echo 'active';
                                     } ?>">
-                            <a href="<?php echo base_url('inventory') ?>">
+                            <a href="<?php echo site_url('Inventory') ?>">
                                 <i class="fa fa-folder"></i> Inventory
                             </a>
                         </li>
@@ -72,7 +72,7 @@
                         <li class="<?php if ($location === 'new_item') {
                                         echo 'active';
                                     } ?>">
-                            <a href="<?php echo base_url('new_item') ?>">
+                            <a href="<?php echo site_url('new_item') ?>">
                                 <i class="fa fa-plus"></i> New Item
                             </a>
                         </li>
@@ -80,7 +80,7 @@
                         <li class="<?php if ($location === 'sales') {
                                         echo 'active';
                                     } ?>">
-                            <a href="<?php echo base_url('daily_sales_report') ?>">
+                            <a href="<?php echo site_url('Sales') ?>">
                                 <i class="fa fa-list-alt"></i> Sales
                             </a>
                         </li>
@@ -93,7 +93,18 @@
                             </a>
                         </li>
 
-                        <?php if ($this->session->userdata('account_type') === 'Admin') : ?>
+                        <?php if ($user['role'] === 'Admin') { ?>
+                            <li class="<?php if ($location === 'hr') {
+                                            echo 'active';
+                                        } ?>">
+                                <a href="<?php echo site_url('Employee') ?>">
+                                    <i class="fa fa-user"></i> HR
+                                </a>
+                            </li>
+                        <?php } ?>
+
+
+                        <?php if ($user['role'] === 'Admin') { ?>
                             <li class="<?php if ($location === 'accounts') {
                                             echo 'active';
                                         } ?>">
@@ -101,12 +112,12 @@
                                     <i class="fa fa-user"></i> Accounts
                                 </a>
                             </li>
-                        <?php endif; ?>
+                        <?php } ?>
 
                         <li class="<?php if ($location === 'logout') {
                                         echo 'active';
                                     } ?>">
-                            <a href="<?php echo base_url('logout/out') ?>">
+                            <a href="<?php echo site_url('Login/logout  ') ?>">
                                 <i class="fa fa-sign-out"></i> Logout
                             </a>
                         </li>
@@ -116,7 +127,6 @@
 
 
             <div class="col-sm-10">
-                Hello
             </div>
         </div>
     </div>

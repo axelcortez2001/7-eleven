@@ -18,24 +18,24 @@ class Login extends CI_Controller
         $password = $this->input->post('password');
         $staff = $this->Staff_model->getStaff($username, $password);
         if ($staff) {
-            $data = array(
+            $userdata = array(
                 'id' => $staff->id,
                 'username' => $staff->username,
                 'password' => $staff->password,
                 'name' => $staff->name,
                 'role' => $staff->role,
             );
-            $this->session->set_userdata('staff', $data);
-            $this->load->view('Dashboard');
+            $this->session->set_userdata('user', $userdata);
+            redirect('Dashboard');
         } else {
             $data['error'] = 'Invalid username or password';
             echo '<script>alert("' . $data['error'] . '");</script>';
             $this->load->view('Login', $data);
         }
     }
-    public function logout(){
-            $this->session->unset_userdata('user');
-            redirect('Login');
+    public function logout()
+    {
+        $this->session->unset_userdata('user');
+        redirect('Login');
     }
 }
-?>
