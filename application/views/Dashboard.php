@@ -3,8 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap/css/bootstrap.css'); ?>">
-    <link rel="stylesheet" type="text/css"
-        href="<?php echo base_url('assets/font-awesome-4.7.0/css/font-awesome.css'); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/font-awesome-4.7.0/css/font-awesome.css'); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/style.css') ?>">
     <style>
         .sidebar {
@@ -63,41 +62,41 @@
                         $location = $this->uri->segment(1);
                         ?>
                         <li class="<?php if (in_array($location, ['inventory', 'item'])) {
-                            echo 'active';
-                        } ?>">
+                                        echo 'active';
+                                    } ?>">
                             <a href="<?php echo base_url('inventory') ?>">
                                 <i class="fa fa-folder"></i> Inventory
                             </a>
                         </li>
 
                         <li class="<?php if ($location === 'new_item') {
-                            echo 'active';
-                        } ?>">
+                                        echo 'active';
+                                    } ?>">
                             <a href="<?php echo base_url('new_item') ?>">
                                 <i class="fa fa-plus"></i> New Item
                             </a>
                         </li>
 
                         <li class="<?php if ($location === 'sales') {
-                            echo 'active';
-                        } ?>">
+                                        echo 'active';
+                                    } ?>">
                             <a href="<?php echo base_url('daily_sales_report') ?>">
                                 <i class="fa fa-list-alt"></i> Sales
                             </a>
                         </li>
 
                         <li class="<?php if ($location === 'categories') {
-                            echo 'active';
-                        } ?>">
+                                        echo 'active';
+                                    } ?>">
                             <a href="<?php echo base_url('categories') ?>">
                                 <i class="fa fa-tags"></i> Categories
                             </a>
                         </li>
 
-                        <?php if ($this->session->userdata('account_type') === 'Admin'): ?>
+                        <?php if ($this->session->userdata('account_type') === 'Admin') : ?>
                             <li class="<?php if ($location === 'accounts') {
-                                echo 'active';
-                            } ?>">
+                                            echo 'active';
+                                        } ?>">
                                 <a href="<?php echo base_url('accounts') ?>">
                                     <i class="fa fa-user"></i> Accounts
                                 </a>
@@ -105,8 +104,8 @@
                         <?php endif; ?>
 
                         <li class="<?php if ($location === 'logout') {
-                            echo 'active';
-                        } ?>">
+                                        echo 'active';
+                                    } ?>">
                             <a href="<?php echo base_url('logout/out') ?>">
                                 <i class="fa fa-sign-out"></i> Logout
                             </a>
@@ -115,7 +114,7 @@
                 </div>
             </div>
 
-         
+
             <div class="col-sm-10">
                 Hello
             </div>

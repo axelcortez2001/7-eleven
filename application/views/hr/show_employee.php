@@ -130,11 +130,11 @@
                     <tbody>
                         <?php foreach ($employees as $employee) : ?>
                             <tr>
-                                <td><?php echo $user['employee_id']; ?></td>
-                                <td><?php echo $user['name']; ?></td>
-                                <td><?php echo $user['role']; ?></td>
-                                <td><?php echo $user['salary']; ?></td>
-                                <td><?php echo $user['bankaccount']; ?></td>
+                                <td><?php echo $employee['employee_id']; ?></td>
+                                <td><?php echo $employee['name']; ?></td>
+                                <td><?php echo $employee['role']; ?></td>
+                                <td><?php echo $employee['salary']; ?></td>
+                                <td><?php echo $employee['bankaccount']; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
